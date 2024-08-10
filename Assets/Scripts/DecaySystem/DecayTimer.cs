@@ -29,7 +29,7 @@ public class DecayTimer : MonoBehaviour
             _currentStageIndex++;
 
             if (_currentStageIndex >= _stage.Count)
-                Debug.LogError("Последняя стадия перед смертью");
+                Debug.LogWarning("Последняя стадия перед смертью");
         }
     }
 

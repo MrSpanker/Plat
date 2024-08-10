@@ -17,11 +17,17 @@ public class DecayManager : MonoBehaviour
     [SerializeField] private float _endInnerRadius = 0.1f;
     [SerializeField] private float _fadeLightDuration = 10f;
 
-    [Header("Звук")]
+    //[Header("Звук")]
     //[SerializeField] private AudioMixer _audioMixer;
-    private float _startVolume;
-    [SerializeField] private float _endVolume = 0.18f;
-    [SerializeField] private float _fadeVolumeDuration = 10f;
+    //private float _startVolume;
+    //[SerializeField] private float _endVolume = 0.18f;
+    //[SerializeField] private float _fadeVolumeDuration = 10f;
+
+    [Header("Скорость персонажа")]
+    [SerializeField] private PlayerController playerController;
+    private float _startMoveSpeed;
+    [SerializeField] private float _endMoveSpeed = 5f;
+    [SerializeField] private float _fadeMoveSpeedDuration = 7f;
 
     private void Start()
     {
@@ -29,18 +35,22 @@ public class DecayManager : MonoBehaviour
         _startInnerRadius = _light2D.pointLightInnerRadius;
 
         //_startVolume = _audioMixer.
+
+        _startMoveSpeed = playerController.moveSpeed;
     }
 
     public void ResetDecay()
     {
         StopAllCoroutines();
-        StartCoroutine(FadeLightIntensity(_light2D.intensity, _light2D.pointLightInnerRadius,
-            _startIntensity, _startInnerRadius, _recoveryTime));
+
+        StartCoroutine(FadeLightIntensity(_light2D.intensity, _light2D.pointLightInnerRadius, _startIntensity, _startInnerRadius, _recoveryTime));
+        StartCoroutine(FadeMoveSpeed(_endMoveSpeed, _startMoveSpeed, _recoveryTime));
         _decayTimer.Reset();
     }
 
     public void ActiveStage(int stageNumber)
     {
+        Debug.Log("Уведание " + stageNumber);
         switch (stageNumber)
         {
             case 0:
@@ -66,7 +76,7 @@ public class DecayManager : MonoBehaviour
 
     private void Stage2()
     {
-
+        StartCoroutine(FadeMoveSpeed(_startMoveSpeed, _endMoveSpeed, _fadeMoveSpeedDuration));
     }
 
     public void ActiveFinalStage()
@@ -74,8 +84,7 @@ public class DecayManager : MonoBehaviour
 
     }
 
-    private IEnumerator FadeLightIntensity(float startIntensity, float startInnerRadius,
-        float endIntensity, float endInnerRadius, float duration)
+    private IEnumerator FadeLightIntensity(float startIntensity, float startInnerRadius, float endIntensity, float endInnerRadius, float duration)
     {
         float elapsed = 0f;
         while (elapsed < duration)
@@ -87,5 +96,17 @@ public class DecayManager : MonoBehaviour
         }
         _light2D.intensity = endIntensity;
         _light2D.pointLightInnerRadius = endInnerRadius;
+    }
+
+    private IEnumerator FadeMoveSpeed(float startMoveSpeed, float endMoveSpeed, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < _fadeMoveSpeedDuration)
+        {
+            elapsed += Time.deltaTime;
+            playerController.moveSpeed = Mathf.Lerp(startMoveSpeed, endMoveSpeed, elapsed / duration);
+            yield return null;
+        }
+        playerController.moveSpeed = endMoveSpeed;
     }
 }
