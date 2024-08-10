@@ -197,6 +197,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4679dd3df77c7924ab165bb435465e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &19969610 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2369990289210757352, guid: dbcb10883e4a7dace8e37feda9a42605,
+    type: 3}
+  m_PrefabInstance: {fileID: 1216422266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19969604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f092b9988b0bc4eaf4776a5ddffb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &30508820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40353,14 +40365,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb4da20effdcc74e9102846c5faedd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _decayTimer: {fileID: 0}
+  _decayTimer: {fileID: 723012224}
   _recoveryTime: 2
   _light2D: {fileID: 570458701}
   _endIntensity: 0.18
   _endInnerRadius: 0.1
   _fadeLightDuration: 10
-  _endVolume: 0.18
-  _fadeVolumeDuration: 10
+  playerController: {fileID: 19969610}
+  _endMoveSpeed: 6.2
+  _fadeMoveSpeedDuration: 7
 --- !u!1001 &726248912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50009,6 +50022,12 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: aed94830e273d8d50b2f11ac9f3c6eab, type: 3}
+    - target: {fileID: 8241988782162368138, guid: d3fb0ebdafe54ed0693397863d0fb7d7,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 305120a6715eb2a489812db18172431e,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3fb0ebdafe54ed0693397863d0fb7d7, type: 3}
 --- !u!1001 &1511421435
