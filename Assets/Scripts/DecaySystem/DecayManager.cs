@@ -46,11 +46,12 @@ public class DecayManager : MonoBehaviour
         StartCoroutine(FadeLightIntensity(_light2D.intensity, _light2D.pointLightInnerRadius, _startIntensity, _startInnerRadius, _recoveryTime));
         StartCoroutine(FadeMoveSpeed(_endMoveSpeed, _startMoveSpeed, _recoveryTime));
         _decayTimer.Reset();
+        Debug.Log("Увядание перезапустилось");
     }
 
     public void ActiveStage(int stageNumber)
     {
-        Debug.Log("Уведание " + stageNumber);
+        Debug.Log("Увядание " + stageNumber);
         switch (stageNumber)
         {
             case 0:
